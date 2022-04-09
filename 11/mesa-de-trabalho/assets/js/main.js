@@ -33,3 +33,39 @@
       //  - 2.2. Valide se existem caracteres especiais 
 
       //      - Se o campo possuir caracteres especiais, apresente a seguinte mensagem no console do navegador `"Não é permitido o uso de caracteres especiais em sua lista."`.
+
+
+let form = document.querySelector('#formularioDeCadastro');
+let campo = document.querySelector('.c-form__campo');
+let li = document.querySelector('.c-lista__item')
+
+
+form.addEventListener('submit', function(e){
+    e.preventDefault()
+   let ValidacaoTrim = campo.value.trim()
+   if(caractersEspeciais(ValidacaoTrim)){
+   alert('Não é permitido o uso de caracteres especiais em sua lista.')
+   }else{
+    li.innerText = ValidacaoTrim;
+}
+  })
+
+  let btn = document.querySelector('.c-form__botao')
+ 
+  campo.addEventListener('blur', function(e){
+    if(campo.value == ''){
+       btn.disabled = true;
+    }
+    else if(caractersEspeciais(campo.value)){
+        console.log('Não é permitido o uso de caracteres especiais em sua lista.')
+    }
+    else if(!caractersEspeciais(campo.value) && campo.value !== '' ){
+        btn.disabled = false;}
+})
+
+
+function caractersEspeciais(v){
+    let regexp = /\W/g;
+    let validacão = regexp.test(v);
+    return validacão;
+}
